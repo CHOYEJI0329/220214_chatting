@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../static/css/media.css" th:href="@{/css/media.css}">
+    <link rel="stylesheet" href="../../static/css/login.css" th:href="@{/css/login.css}">
+    <title>로그인</title>
+</head>
+<body>
+<div>
+    <div class="logo">
+        <img src="../../static/img/cloud.png" th:src="@{/img/cloud.png}">
+    </div>
+    <div class="container">
+        <div class="idAndPw">
+            <input type="text" class="form-control mb-2" placeholder="아이디를 입력하세요">
+            <input type="text" class="form-control" placeholder="비밀번호를 입력하세요">
+        </div>
+        <div>
+            <button type="button" class="btn btn-success loginButton">로그인</button>
+        </div>
+        <div class="textLink">
+            <a href="#" class="mr-2">아이디/비밀번호 찾기</a>
+            <a href="###">회원가입</a>
+        </div>
+    </div>
+</div>
+<div class="bigScreenText">
+화면 너비가 맞지 않습니다. 크기를 줄여주세요.
+</div>
+</body>
+</html>
+

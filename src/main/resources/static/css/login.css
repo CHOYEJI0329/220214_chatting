@@ -1,0 +1,31 @@
+body{
+    background-color: skyblue;
+}
+.idAndPw{
+    position: absolute;
+    left: 100px;
+    top: 400px;
+}
+.loginButton{
+    position: absolute;
+    left: 350px;
+    top: 400px;
+    width: 100px;
+    height: 80px;
+}
+.textLink{
+    position: absolute;
+    left: 100px;
+    top: 500px;
+}
+a:link{
+    color: black;
+}
+a:visited {
+    color : red;
+}
+.logo{
+    position: absolute;
+    left: 180px;
+    top: 250px;
+}
