@@ -24,7 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable() // 스프링 시큐리티 내에 있는 csrf 보안 기술을 없애는거라 보안상 안좋지만 현재는 테스트 용이므로 없앴음.
                 .authorizeRequests()
-                    .antMatchers("/account/**", "/css/**", "/js/**", "/img/**").permitAll()
+                    .antMatchers("/account/**", "/css/**", "/js/**", "/img/**", "/api/**").permitAll()
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
@@ -40,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     Authroization  권한
     */
 
-    @Autowired
+   /* @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth)
             throws Exception {
         auth.jdbcAuthentication()
@@ -53,7 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         + "from user_role ur inner join user u on ur.user_id = u.id "
                         + "inner join role r on ur.role_id = r.id "
                         + "where u.username = ?");
-    }
+    }*/
 
     @Bean
     public PasswordEncoder passwordEncoder() {

@@ -22,3 +22,37 @@ function findPW(){
     document.getElementById('findPWForm').style.display = "block";
     document.getElementById('findIDForm').style.display = "none";
 }
+
+function nicknameChange(){
+    let param = {nickname: document.getElementById("userNickname").value};
+    $.ajax({
+        type: "POST",
+        url: "/api/nicknameChange",
+        contentType: 'application/json',
+        async: false,
+        dataType: "json",
+        data: JSON.stringify(param),
+        success: function(result) {
+            if(result){
+                let nicknameCheck = document.getElementById("nickNameCheck");
+                nicknameCheck.style.color = "red";
+                nicknameCheck.style.fontSize="13px"
+                nicknameCheck.style.paddingLeft="20px"
+                nicknameCheck.style.paddingTop="2px"
+                nicknameCheck.innerHTML = "이미 존재하는 닉네임입니다.";
+            }else {
+                let nicknameCheck = document.getElementById("nickNameCheck");
+                nicknameCheck.style.color = "green";
+                nicknameCheck.style.fontSize="13px"
+                nicknameCheck.style.paddingLeft="20px"
+                nicknameCheck.style.paddingTop="2px"
+                nicknameCheck.innerHTML = "사용 가능한 닉네임입니다.";
+            }
+        },
+        error: function (error){
+            console.log("데이터 검색에 실패했습니다.");
+            console.log(error);
+        }
+    });
+}
+
