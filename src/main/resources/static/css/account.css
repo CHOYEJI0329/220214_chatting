@@ -35,3 +35,10 @@ a:visited {
 #findPW {
     color: black;
 }
+
+#nickNameCheck, #idCheck, #pwCheck {
+    font-size: 13px;
+    padding-left: 20px;
+    padding-top: 2px;
+}
+

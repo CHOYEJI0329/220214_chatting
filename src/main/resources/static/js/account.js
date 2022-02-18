@@ -1,6 +1,6 @@
 function findID(){
-    const findID = document.getElementById('findID');
-    const findPW = document.getElementById('findPW');
+    let findID = document.getElementById('findID');
+    let findPW = document.getElementById('findPW');
     findID.classList.add('active');
     findID.style.backgroundColor = "red";
     findID.style.color = "white";
@@ -11,8 +11,8 @@ function findID(){
     document.getElementById('findPWForm').style.display = "none";
 }
 function findPW(){
-    const findID = document.getElementById('findID');
-    const findPW = document.getElementById('findPW');
+    let findID = document.getElementById('findID');
+    let findPW = document.getElementById('findPW');
     findPW.classList.add('active');
     findPW.style.backgroundColor = "red";
     findPW.style.color = "white";
@@ -24,35 +24,129 @@ function findPW(){
 }
 
 function nicknameChange(){
-    let param = {nickname: document.getElementById("userNickname").value};
-    $.ajax({
-        type: "POST",
-        url: "/api/nicknameChange",
-        contentType: 'application/json',
-        async: false,
-        dataType: "json",
-        data: JSON.stringify(param),
-        success: function(result) {
-            if(result){
-                let nicknameCheck = document.getElementById("nickNameCheck");
-                nicknameCheck.style.color = "red";
-                nicknameCheck.style.fontSize="13px"
-                nicknameCheck.style.paddingLeft="20px"
-                nicknameCheck.style.paddingTop="2px"
-                nicknameCheck.innerHTML = "이미 존재하는 닉네임입니다.";
-            }else {
-                let nicknameCheck = document.getElementById("nickNameCheck");
-                nicknameCheck.style.color = "green";
-                nicknameCheck.style.fontSize="13px"
-                nicknameCheck.style.paddingLeft="20px"
-                nicknameCheck.style.paddingTop="2px"
-                nicknameCheck.innerHTML = "사용 가능한 닉네임입니다.";
+    let nickname = document.getElementById("userNickname").value.trim();
+    let param = {nickname: nickname};
+    let nicknameCheck = document.getElementById("nickNameCheck");
+    let nickNameFlag = document.getElementById("nickNameFlag");
+
+    if(!nickname){
+        nicknameCheck.style.color = "red";
+        nicknameCheck.innerHTML = "필수 입력 사항입니다.";
+        nickNameFlag.value = "false";
+    }else {
+        $.ajax({
+            type: "POST",
+            url: "/api/nicknameChange",
+            contentType: 'application/json',
+            async: false,
+            dataType: "json",
+            data: JSON.stringify(param),
+            success: function (result) {
+                if (result) {
+                    nicknameCheck.style.color = "red";
+                    nicknameCheck.innerHTML = "이미 존재하는 닉네임입니다.";
+                    nickNameFlag.value = "false";
+                } else {
+                    nicknameCheck.style.color = "green";
+                    nicknameCheck.innerHTML = "사용 가능한 닉네임입니다.";
+                    nickNameFlag.value = "true";
+                }
+            },
+            error: function (error) {
+                console.log("데이터 검색에 실패했습니다.");
+                console.log(error);
             }
-        },
-        error: function (error){
-            console.log("데이터 검색에 실패했습니다.");
-            console.log(error);
-        }
-    });
+        });
+    }
 }
+
+function idChange(){
+    let userID = document.getElementById("userID").value.trim();
+    let param = {id: userID};
+    let idCheck = document.getElementById("idCheck");
+    let idFlag = document.getElementById("idFlag");
+
+    if(!userID){
+        idCheck.style.color = "red";
+        idCheck.innerHTML = "필수 입력 사항입니다.";
+        idFlag.value = "false";
+    }else {
+        $.ajax({
+            type: "POST",
+            url: "/api/idChange",
+            contentType: 'application/json',
+            async: false,
+            dataType: "json",
+            data: JSON.stringify(param),
+            success: function (result) {
+                if (result) {
+                    idCheck.style.color = "red";
+                    idCheck.innerHTML = "이미 존재하는 아이디입니다.";
+                    idFlag.value = "false";
+                } else {
+                    idCheck.style.color = "green";
+                    idCheck.innerHTML = "사용 가능한 아이디입니다.";
+                    idFlag.value = "true";
+                }
+            },
+            error: function (error) {
+                console.log("데이터 검색에 실패했습니다.");
+                console.log(error);
+            }
+        });
+    }
+}
+
+function pwCheck(){
+    let pw = document.getElementById("userPW").value;
+    let checkUserPW = document.getElementById("checkUserPW").value;
+    let pwCheck = document.getElementById("pwCheck");
+    let checkPwFlag = document.getElementById("checkPwFlag");
+
+    if(pw != checkUserPW){
+        pwCheck.style.color = "red";
+        pwCheck.innerHTML = "패스워드와 패스워드 확인이 같지 않습니다.";
+        checkPwFlag.value = "false";
+    }else{
+        pwCheck.style.display = "none";
+        checkPwFlag.value = "true";
+    }
+}
+
+function done() {
+
+    let userName = document.getElementById("userName").value;
+    let userGender = document.querySelector('input[name="gender"]:checked');
+    let userNickname = document.getElementById("userNickname").value;
+    let userBirthday = document.getElementById("userBirthday").value;
+    let userEmail = document.getElementById("userEmail").value;
+    let userID = document.getElementById("userID").value;
+    let userPW = document.getElementById("userPW").value;
+    let checkUserPW = document.getElementById("checkUserPW").value;
+
+    let nickNameFlag = document.getElementById("nickNameFlag").value;
+    let idFlag = document.getElementById("idFlag").value;
+    let checkPwFlag = document.getElementById("checkPwFlag").value;
+
+    if (!userName) {
+        document.getElementById("userName").focus();
+    } else if (!userGender) {
+        document.getElementById("woman").focus();
+    } else if (!userNickname || nickNameFlag == "false") {
+        document.getElementById("userNickname").focus();
+    } else if (!userBirthday) {
+        document.getElementById("userBirthday").focus();
+    } else if (!userEmail) {
+        document.getElementById("userEmail").focus();
+    } else if (!userID || idFlag == "false") {
+        document.getElementById("userID").focus();
+    } else if (!userPW) {
+        document.getElementById("userPW").focus();
+    } else if (!checkUserPW || checkPwFlag == "false") {
+        document.getElementById("checkUserPW").focus();
+    }else{
+        document.getElementById("registerForm").submit();
+    }
+}
+
 

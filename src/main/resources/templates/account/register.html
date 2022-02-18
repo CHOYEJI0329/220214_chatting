@@ -17,62 +17,69 @@
         <h2>회원가입</h2>
     </div>
     <div class="container">
-        <form method="post" action="###">
+        <form method="post" action="/account/register" th:action="@{/account/register}" th:method = "POST" id="registerForm">
             <div class="row mb-3">
                 <label for="userName" class="col-sm-2 col-form-label">이름</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="userName" name="userName">
+                    <input type="text" class="form-control" id="userName" name="name">
                 </div>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="userGender" id="woman" value="woman">
+                <input class="form-check-input" type="radio" name="gender" id="woman" value="1">
                 <label class="form-check-label" for="woman">여자</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="userGender" id="man" value="man">
+                <input class="form-check-input" type="radio" name="gender" id="man" value="2">
                 <label class="form-check-label" for="man">남자</label>
             </div>
             <div class="row mb-3">
                 <label for="userNickname" class="col-sm-2 col-form-label">닉네임</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="userNickname" name="userNickname" onchange = "nicknameChange()" th:onchange="nicknameChange()">
+                    <input type="text" class="form-control" id="userNickname" name="nickname" onchange = "nicknameChange()" th:onchange="nicknameChange()">
                 </div>
-            <div id="nickNameCheck"> </div>
+                <div id="nickNameCheck"> </div>
             </div>
             <div class="row mb-3">
                 <label for="userBirthday" class="col-sm-2 col-form-label">생년월일</label>
                 <div class="col-sm-10">
-                    <input type="email" class="form-control" id="userBirthday" name="userBirthday" placeholder="8자리로 입력해주세요.">
+                    <input type="email" class="form-control" id="userBirthday" name="birthday" placeholder="8자리로 입력해주세요.">
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="userEmail" class="col-sm-2 col-form-label">이메일</label>
                 <div class="col-sm-10">
-                    <input type="email" class="form-control" id="userEmail" name="userEmail">
+                    <input type="email" class="form-control" id="userEmail" name="email">
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="userID" class="col-sm-2 col-form-label">아이디</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="userID" name="userID">
+                    <input type="text" class="form-control" id="userID" name="id" onchange = "idChange()" th:onchange="idChange()">
                 </div>
+                <div id="idCheck"> </div>
             </div>
             <div class="row mb-3">
                 <label for="userPW" class="col-sm-2 col-form-label">패스워드</label>
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" id="userPW" name="userPW">
+                    <input type="password" class="form-control" id="userPW" name="pw">
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="checkUserPW" class="col-sm-2 col-form-label">패스워드 확인</label>
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" id="checkUserPW" name="checkUserPW">
+                    <input type="password" class="form-control" id="checkUserPW" name="checkUserPW" onchange="pwCheck()" th:onchange="pwCheck()">
                 </div>
+                <div id="pwCheck"> </div>
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button class="btn btn-secondary" type="reset">초기화</button>
-                <button class="btn btn-success me-md-2" type="submit">완료</button>
+                <button class="btn btn-success me-md-2" type="button" onclick="done()" th:onclick="done()">완료</button>
             </div>
+
+            <input type="hidden" id="nickNameFlag">
+            <input type="hidden" id="idFlag">
+            <input type="hidden" id="checkPwFlag">
+
         </form>
     </div>
 </div>
@@ -81,4 +88,5 @@
 </div>
 </body>
 </html>
+
 
