@@ -29,9 +29,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                 .formLogin()
                     .loginPage("/account/login")
+                    .defaultSuccessUrl("/")
                     .permitAll()
-                    .and()
-                .logout()
+                .and()
+                    .logout()
+                    .logoutSuccessUrl("/account/login")
+                    .invalidateHttpSession(true)
                     .permitAll();
     }
 
@@ -45,14 +48,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             throws Exception {
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
-//                .passwordEncoder(passwordEncoder())
-                .usersByUsernameQuery("select username,password,enabled "   // 인증처리
-                        + "from user "
-                        + "where username = ?")
-                .authoritiesByUsernameQuery("select u.username, r.name "    // 권한처리
+                .passwordEncoder(passwordEncoder())
+                .usersByUsernameQuery("select id,pw,enabled "   // 인증처리
+                        + "from login "
+                        + "where id = ? ");
+                *//*.authoritiesByUsernameQuery("select u.username, r.name "    // 권한처리
                         + "from user_role ur inner join user u on ur.user_id = u.id "
                         + "inner join role r on ur.role_id = r.id "
-                        + "where u.username = ?");
+                        + "where u.username = ?");*//*
     }*/
 
     @Bean

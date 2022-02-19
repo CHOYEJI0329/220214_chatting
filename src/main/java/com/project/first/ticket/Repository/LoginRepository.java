@@ -8,4 +8,6 @@ public interface LoginRepository extends JpaRepository<Login, Long> {
 
     boolean existsById (String nickName);
 
+    Login findByIdAndEnabled (String id, Integer enabled);
+
 }

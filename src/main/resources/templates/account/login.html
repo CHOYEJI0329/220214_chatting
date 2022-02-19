@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="../../static/css/media.css" th:href="@{/css/media.css}">
     <link rel="stylesheet" href="../../static/css/account.css" th:href="@{/css/account.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../../static/js/account.js" th:src="@{/js/account.js}"></script>
     <title>로그인</title>
 </head>
 <body>
@@ -15,13 +17,17 @@
         <img src="../../static/img/cloud.png" th:src="@{/img/cloud.png}">
     </div>
     <div class="container">
-        <form th:action="@{/account/login}" method="post">
+        <form method="post" action="/account/login" th:action="@{/account/login}">
+            <div th:if="${param.error}" class="alert alert-danger">
+                error
+            </div>
             <div class="idAndPw">
-                <input type="text" class="form-control mb-2" placeholder="아이디를 입력하세요">
-                <input type="text" class="form-control" placeholder="비밀번호를 입력하세요">
+                <input type="text" id="id" name="id" class="form-control mb-2" placeholder="아이디를 입력하세요">
+                <input type="password" id="pw" name="pw" class="form-control" placeholder="비밀번호를 입력하세요">
             </div>
             <div>
-                <button type="button" class="btn btn-success loginButton">로그인</button>
+                <button type="button" class="btn btn-success loginButton" th:onclick="login()">로그인</button>
+<!--                <button type="submit" class="btn btn-success loginButton">로그인</button>-->
             </div>
         </form>
         <div class="textLink">

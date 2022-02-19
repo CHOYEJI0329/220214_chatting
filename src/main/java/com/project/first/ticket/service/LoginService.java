@@ -24,4 +24,13 @@ public class LoginService {
         return loginRepository.save(login);
     }
 
+    public boolean existsByIdAndPw(Login login){
+        String pw = login.getPw();
+        login = loginRepository.findByIdAndEnabled(login.getId(), 1);
+        boolean result = false;
+        if(login != null) result = passwordEncoder.matches(pw, login.getPw());
+
+        return result;
+    }
+
 }

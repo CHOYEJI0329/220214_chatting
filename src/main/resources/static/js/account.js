@@ -149,4 +149,32 @@ function done() {
     }
 }
 
+function login(){
+    let id = document.getElementById("id").value;
+    let pw = document.getElementById("pw").value;
+
+    let param = {id: id, pw: pw};
+    $.ajax({
+        type: "POST",
+        url: "/api/login",
+        contentType: 'application/json',
+        async: false,
+        dataType: "json",
+        data: JSON.stringify(param),
+        success: function (result) {
+            if (result) {
+                alert("바로 홈으로 이동(아직 만들기 전)")
+            } else {
+                alert("로그인 실패");
+            }
+        },
+        error: function (error) {
+            console.log("데이터 검색에 실패했습니다.");
+            console.log(error);
+        }
+    });
+
+}
+
+
 

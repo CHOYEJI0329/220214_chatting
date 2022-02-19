@@ -51,9 +51,9 @@ public class AccountController {
         login.setId(request.getParameter("id"));
         login.setPw(request.getParameter("pw"));
         login.setUserIdx(user.getIdx());
-        login = loginService.save(login);
+        loginService.save(login);
 
-        return "account/login";
+        return "redirect:/";
     }
 
 
