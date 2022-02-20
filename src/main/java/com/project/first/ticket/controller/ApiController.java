@@ -49,4 +49,12 @@ public class ApiController {
         return result;
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/findId", method = RequestMethod.POST)
+    public boolean findId(@RequestBody User user){
+
+
+        return false;
+    }
+
 }
