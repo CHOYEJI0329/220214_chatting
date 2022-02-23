@@ -5,11 +5,14 @@ import com.project.first.ticket.Repository.UserRepository;
 import com.project.first.ticket.model.Login;
 import com.project.first.ticket.model.User;
 import com.project.first.ticket.service.LoginService;
+import com.project.first.ticket.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -24,6 +27,9 @@ public class ApiController {
 
     @Autowired
     private LoginService loginService;
+
+    @Autowired
+    private UserService userService;
 
     @ResponseBody
     @RequestMapping(value = "/nicknameChange", method = RequestMethod.POST)
@@ -51,10 +57,16 @@ public class ApiController {
 
     @ResponseBody
     @RequestMapping(value = "/findId", method = RequestMethod.POST)
-    public boolean findId(@RequestBody User user){
+    public List<Login> findId(@RequestBody User user){
 
+        user = userRepository.findByNameAndBirthday(user.getName(), user.getBirthday());
+        List<Login> loginList = new ArrayList<>();
 
-        return false;
+        if(user != null) {
+            loginList = loginRepository.findAllByUserIdx(user.getIdx());
+        }
+
+        return loginList;
     }
 
 }

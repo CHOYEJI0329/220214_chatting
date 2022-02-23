@@ -176,5 +176,43 @@ function login(){
 
 }
 
+function findUserId(){
+    let userName = document.getElementById("userName").value;
+    let userBirthday = document.getElementById("userBirthday").value;
+    let param = {name: userName, birthday: userBirthday};
+
+    $.ajax({
+        type: "POST",
+        url: "/api/findId",
+        contentType: 'application/json',
+        async: false,
+        dataType: "json",
+        data: JSON.stringify(param),
+        success: function (data) {
+            if (data.length == 0) {
+                document.getElementById("findUserId").innerText = "회원정보가 존재하지 않습니다.";
+            } else {
+                console.log(data);
+                document.getElementById("findUserId").innerText = "회원 ID는 ";
+                data.forEach(function(element, index, array){
+                    document.getElementById("findUserId").innerText += "'"+ array[index].id.substr(0,1) +
+                        "*".repeat(array[index].id.length - 2) + array[index].id.substr(array[index].id.length - 1) + "'";
+                });
+                document.getElementById("findUserId").innerText += "입니다.";
+            }
+            $('#findIdModal').show();
+        },
+        error: function (error) {
+            console.log("데이터 검색에 실패했습니다.");
+            console.log(error);
+        }
+    });
+}
+
+function close_pop(){
+    $('#findIdModal').hide();
+}
+
+
 
 
