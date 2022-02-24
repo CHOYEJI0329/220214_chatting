@@ -12,6 +12,8 @@ public interface LoginRepository extends JpaRepository<Login, Long> {
 
     Login findByIdAndEnabled (String id, Integer enabled);
 
+    Login findByUserIdx(Long userIdx);
+
     List<Login> findAllByUserIdx(Long userIdx);
 
 }
